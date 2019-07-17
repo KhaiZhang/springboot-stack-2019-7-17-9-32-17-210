@@ -32,10 +32,16 @@ public class CaseRepositoryTest {
     }
 
     @Test
-    public void findCaseById() {
+    public void should_return_correct_case_when_find_case_by_id() {
         Case casee= caseRepository.findCaseById(1);
         Assertions.assertEquals(casee.getName(),"childCase");
         Assertions.assertEquals(casee.getTime(),123456789);
+    }
 
+    @Test
+    public void should_return_all_case_order_by_time() {
+        List<Case> cases = caseRepository.findAllByOrderByTimeDesc();
+        Assertions.assertEquals(cases.size(),3);
+        Assertions.assertEquals(cases.get(0).getTime(),234166782);
     }
 }
