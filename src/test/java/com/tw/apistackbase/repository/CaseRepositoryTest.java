@@ -1,6 +1,7 @@
 package com.tw.apistackbase.repository;
 
 import com.tw.apistackbase.model.Case;
+import com.tw.apistackbase.model.CrimeInformation;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -22,13 +23,26 @@ public class CaseRepositoryTest {
     @Autowired
     private CaseRepository caseRepository;
 
+    @Autowired
+    private CirmeInformationRepository cirmeInformationRepository;
+
     @Before
     public void setupData(){
+        ArrayList<CrimeInformation> crimeInformations = new ArrayList<>();
+        CrimeInformation firstCrimeInformation = new CrimeInformation("犯罪", "犯罪2");
+        CrimeInformation secondCrimeInformation = new CrimeInformation("犯罪3", "犯罪4");
+        CrimeInformation thirdCrimeInformation = new CrimeInformation("犯罪5", "犯罪6");
+        CrimeInformation forthCrimeInformation = new CrimeInformation("犯罪7", "犯罪8");
+        crimeInformations.add(firstCrimeInformation);
+        crimeInformations.add(secondCrimeInformation);
+        crimeInformations.add(thirdCrimeInformation);
+        crimeInformations.add(forthCrimeInformation);
+        cirmeInformationRepository.saveAll(crimeInformations);
         List<Case> cases = new ArrayList<>();
-        cases.add(new Case(123456789,"childCase"));
-        cases.add(new Case(234166782,"adultCase"));
-        cases.add(new Case(231324512,"olderCase"));
-        cases.add(new Case(131324512,"olderCase"));
+        cases.add(new Case(123456789,"childCase",firstCrimeInformation));
+        cases.add(new Case(234166782,"adultCase",secondCrimeInformation));
+        cases.add(new Case(231324512,"olderCase",thirdCrimeInformation));
+        cases.add(new Case(131324512,"olderCase",forthCrimeInformation));
         caseRepository.saveAll(cases);
     }
 

@@ -2,10 +2,7 @@ package com.tw.apistackbase.model;
 
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Case {
@@ -15,8 +12,12 @@ public class Case {
     private long id;
     @Column(nullable = false)
     private long time;
+
     @Column(nullable = false)
     private String name;
+    @OneToOne
+    @JoinColumn(nullable = false)
+    private CrimeInformation crimeInformation;
 
     public Case(){
 
@@ -24,6 +25,19 @@ public class Case {
     public Case( long time, String name) {
         this.time = time;
         this.name = name;
+    }
+    public Case(long time, String name, CrimeInformation crimeInformation) {
+        this.time = time;
+        this.name = name;
+        this.crimeInformation = crimeInformation;
+    }
+
+    public CrimeInformation getCrimeInformation() {
+        return crimeInformation;
+    }
+
+    public void setCrimeInformation(CrimeInformation crimeInformation) {
+        this.crimeInformation = crimeInformation;
     }
 
     public long getId() {
