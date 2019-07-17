@@ -2,6 +2,8 @@ package com.tw.apistackbase.model;
 
 
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,7 +17,8 @@ public class Case {
 
     @Column(nullable = false)
     private String name;
-    @OneToOne
+
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(nullable = false)
     private CrimeInformation crimeInformation;
 

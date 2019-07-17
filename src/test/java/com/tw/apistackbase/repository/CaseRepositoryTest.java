@@ -12,12 +12,14 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 @RunWith(SpringRunner.class)
 @DataJpaTest
+@Transactional
 public class CaseRepositoryTest {
 
     @Autowired
@@ -75,4 +77,15 @@ public class CaseRepositoryTest {
         caseRepository.deleteById(aCase.getId());
         Assertions.assertEquals(caseRepository.findAll().size(),3);
     }
+
+//    @Test
+//    public void should_update_crime_information_by_case_id(){
+//        long id = caseRepository.findAll().get(0).getId();
+//        CrimeInformation crimeInformation = new CrimeInformation("犯罪9", "犯罪10");
+//        cirmeInformationRepository.save(crimeInformation);
+//        caseRepository.updateCaseCrimeInformation(id,crimeInformation);
+//        Case aCase = caseRepository.findById(id).get();
+//        Assertions.assertEquals("犯罪9",aCase.getCrimeInformation().getObjectDesciption());
+//        Assertions.assertEquals("犯罪10",aCase.getCrimeInformation().getSuperisorDesciption());
+//    }
 }

@@ -55,4 +55,6 @@ public class CirmeInformationRepositoryTest {
         Assertions.assertEquals("犯罪",crimeInformation.getObjectDesciption());
         Assertions.assertEquals("犯罪2",crimeInformation.getSuperisorDesciption());
     }
+
+
 }
