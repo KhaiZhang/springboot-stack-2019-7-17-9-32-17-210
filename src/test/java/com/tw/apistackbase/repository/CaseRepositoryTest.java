@@ -28,6 +28,7 @@ public class CaseRepositoryTest {
         cases.add(new Case(123456789,"childCase"));
         cases.add(new Case(234166782,"adultCase"));
         cases.add(new Case(231324512,"olderCase"));
+        cases.add(new Case(131324512,"olderCase"));
         caseRepository.saveAll(cases);
     }
 
@@ -43,5 +44,12 @@ public class CaseRepositoryTest {
         List<Case> cases = caseRepository.findAllByOrderByTimeDesc();
         Assertions.assertEquals(cases.size(),3);
         Assertions.assertEquals(cases.get(0).getTime(),234166782);
+    }
+
+    @Test
+    public void should_return_all_case_by_name() {
+        List<Case> cases = caseRepository.findAllByName("olderCase");
+        Assertions.assertEquals(cases.size(),2);
+        Assertions.assertEquals(cases.get(0).getName(),"olderCase");
     }
 }
