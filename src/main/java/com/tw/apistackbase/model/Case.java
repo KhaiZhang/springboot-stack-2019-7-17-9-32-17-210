@@ -21,8 +21,7 @@ public class Case {
     public Case(){
 
     }
-    public Case(long id, long time, String name) {
-        this.id = id;
+    public Case( long time, String name) {
         this.time = time;
         this.name = name;
     }
