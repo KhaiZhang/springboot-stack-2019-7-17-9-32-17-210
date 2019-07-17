@@ -34,7 +34,8 @@ public class CaseRepositoryTest {
 
     @Test
     public void should_return_correct_case_when_find_case_by_id() {
-        Case casee= caseRepository.findCaseById(1);
+        long id = caseRepository.findAll().get(0).getId();
+        Case casee= caseRepository.findCaseById(id);
         Assertions.assertEquals(casee.getName(),"childCase");
         Assertions.assertEquals(casee.getTime(),123456789);
     }
@@ -42,7 +43,7 @@ public class CaseRepositoryTest {
     @Test
     public void should_return_all_case_order_by_time() {
         List<Case> cases = caseRepository.findAllByOrderByTimeDesc();
-        Assertions.assertEquals(cases.size(),3);
+        Assertions.assertEquals(cases.size(),4);
         Assertions.assertEquals(cases.get(0).getTime(),234166782);
     }
 
@@ -51,5 +52,13 @@ public class CaseRepositoryTest {
         List<Case> cases = caseRepository.findAllByName("olderCase");
         Assertions.assertEquals(cases.size(),2);
         Assertions.assertEquals(cases.get(0).getName(),"olderCase");
+    }
+
+    @Test
+    public void should_delete_case_by_id() {
+        Case aCase = caseRepository.findAll().get(1);
+        System.out.println(aCase.getId());
+        caseRepository.deleteById(aCase.getId());
+        Assertions.assertEquals(caseRepository.findAll().size(),3);
     }
 }
