@@ -3,6 +3,7 @@ package com.tw.apistackbase.repository;
 import com.tw.apistackbase.model.Case;
 import com.tw.apistackbase.model.CrimeInformation;
 import com.tw.apistackbase.model.Procuratorate;
+import com.tw.apistackbase.model.Prosecutor;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -19,16 +20,24 @@ import static org.junit.jupiter.api.Assertions.*;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class ProcuratorateRepositoryTest {
+
     @Autowired
     private ProcuratorateRepository procuratorateRepository;
 
+    @Autowired
+    private ProsecutorRepository prosecutorRepository;
+
     @Before
     public void setupData(){
+        ArrayList<Prosecutor> prosecutors = new ArrayList<>();
+        prosecutors.add(new Prosecutor("MR Wang"));
+        prosecutors.add(new Prosecutor("MR Tang"));
+        prosecutorRepository.saveAll(prosecutors);
         ArrayList<Procuratorate> procuratorates = new ArrayList<>();
-        Procuratorate procuratorate1 = new Procuratorate("郑州");
-        Procuratorate procuratorate2 = new Procuratorate("温州");
-        procuratorates.add(procuratorate1);
-        procuratorates.add(procuratorate2);
+        Procuratorate firstProcuratorate = new Procuratorate("郑州",prosecutors);
+        Procuratorate secondProcuratorate = new Procuratorate("温州",prosecutors);
+        procuratorates.add(firstProcuratorate);
+        procuratorates.add(secondProcuratorate);
         procuratorateRepository.saveAll(procuratorates);
     }
 
@@ -37,5 +46,11 @@ public class ProcuratorateRepositoryTest {
         long id = procuratorateRepository.findAll().get(0).getId();
         Procuratorate procuratorate= procuratorateRepository.findProcuratorateById(id);
         Assertions.assertEquals("郑州",procuratorate.getName());
+    }
+
+    @Test
+    public void should_reuturn_prosecutor_included_by_procuratorate() {
+        Procuratorate procuratorate = procuratorateRepository.findAll().stream().findAny().orElse(null);
+        Assertions.assertNotNull(procuratorate.getProsecutor());
     }
 }
