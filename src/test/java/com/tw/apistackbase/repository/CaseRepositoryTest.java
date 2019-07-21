@@ -2,6 +2,7 @@ package com.tw.apistackbase.repository;
 
 import com.tw.apistackbase.model.Case;
 import com.tw.apistackbase.model.CrimeInformation;
+import com.tw.apistackbase.model.Procuratorate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
@@ -40,11 +41,13 @@ public class CaseRepositoryTest {
         crimeInformations.add(thirdCrimeInformation);
         crimeInformations.add(forthCrimeInformation);
         cirmeInformationRepository.saveAll(crimeInformations);
+        Procuratorate firstProcuratorate = new Procuratorate("京都");
+        Procuratorate secondeProcuratorate = new Procuratorate("西安");
         List<Case> cases = new ArrayList<>();
-        cases.add(new Case(123456789,"childCase",firstCrimeInformation));
-        cases.add(new Case(234166782,"adultCase",secondCrimeInformation));
-        cases.add(new Case(231324512,"olderCase",thirdCrimeInformation));
-        cases.add(new Case(131324512,"olderCase",forthCrimeInformation));
+        cases.add(new Case(123456789,"childCase",firstCrimeInformation,firstProcuratorate));
+        cases.add(new Case(234166782,"adultCase",secondCrimeInformation,firstProcuratorate));
+        cases.add(new Case(231324512,"olderCase",thirdCrimeInformation,secondeProcuratorate));
+        cases.add(new Case(131324512,"olderCase",forthCrimeInformation,secondeProcuratorate));
         caseRepository.saveAll(cases);
     }
 
@@ -82,6 +85,14 @@ public class CaseRepositoryTest {
         Case casee = caseRepository.findAll().stream().findAny().orElse(null);
         Case aCase = caseRepository.findById(casee.getId()).orElse(null);
         Assertions.assertNotNull(aCase.getCrimeInformation());
+
+    }
+
+    @Test
+    public void should_return_procuratorate_by_case_id(){
+        Case casee = caseRepository.findAll().stream().findAny().orElse(null);
+        Case aCase = caseRepository.findById(casee.getId()).orElse(null);
+        Assertions.assertNotNull(aCase.getProcuratorate());
 
     }
 

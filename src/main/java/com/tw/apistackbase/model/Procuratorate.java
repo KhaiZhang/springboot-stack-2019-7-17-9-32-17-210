@@ -12,7 +12,7 @@ public class Procuratorate {
     @Column(length = 255)
     private long id;
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false,unique = true,length = 50)
     private String name;
 
     public Procuratorate() {

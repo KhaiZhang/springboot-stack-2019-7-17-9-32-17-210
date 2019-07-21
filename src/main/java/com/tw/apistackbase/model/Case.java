@@ -22,6 +22,10 @@ public class Case {
     @JoinColumn(name = "crimeInformationId" , referencedColumnName = "id")
     private CrimeInformation crimeInformation;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "procuratorateId" , referencedColumnName = "id",nullable = false)
+    private Procuratorate procuratorate;
+
     public Case(){
 
     }
@@ -33,6 +37,21 @@ public class Case {
         this.time = time;
         this.name = name;
         this.crimeInformation = crimeInformation;
+    }
+
+    public Case(long time, String name, CrimeInformation crimeInformation, Procuratorate procuratorate) {
+        this.time = time;
+        this.name = name;
+        this.crimeInformation = crimeInformation;
+        this.procuratorate = procuratorate;
+    }
+
+    public Procuratorate getProcuratorate() {
+        return procuratorate;
+    }
+
+    public void setProcuratorate(Procuratorate procuratorate) {
+        this.procuratorate = procuratorate;
     }
 
     public CrimeInformation getCrimeInformation() {
