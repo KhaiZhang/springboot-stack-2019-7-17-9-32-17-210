@@ -73,9 +73,16 @@ public class CaseRepositoryTest {
     @Test
     public void should_delete_case_by_id() {
         Case aCase = caseRepository.findAll().get(1);
-        System.out.println(aCase.getId());
         caseRepository.deleteById(aCase.getId());
         Assertions.assertEquals(caseRepository.findAll().size(),3);
+    }
+
+    @Test
+    public void should_return_crime_information_by_case_id(){
+        Case casee = caseRepository.findAll().stream().findAny().orElse(null);
+        Case aCase = caseRepository.findById(casee.getId()).orElse(null);
+        Assertions.assertNotNull(aCase.getCrimeInformation());
+
     }
 
 //    @Test

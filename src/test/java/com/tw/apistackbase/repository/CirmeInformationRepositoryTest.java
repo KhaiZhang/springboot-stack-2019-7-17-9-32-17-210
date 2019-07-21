@@ -48,13 +48,7 @@ public class CirmeInformationRepositoryTest {
         Assertions.assertEquals("犯罪2",crimeInformation.getSuperisorDesciption());
     }
 
-    @Test
-    public void should_return_crime_information_by_case_id(){
-        long id = caseRepository.findAll().get(0).getId();
-        CrimeInformation crimeInformation = caseRepository.findAll().get(0).getCrimeInformation();
-        Assertions.assertEquals("犯罪",crimeInformation.getObjectDesciption());
-        Assertions.assertEquals("犯罪2",crimeInformation.getSuperisorDesciption());
-    }
+
 
 
 }

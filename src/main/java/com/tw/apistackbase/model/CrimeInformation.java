@@ -17,6 +17,8 @@ public class CrimeInformation {
     @Column(nullable = false,length = 255)
     private String superisorDesciption;
 
+
+
     public CrimeInformation() {
     }
 

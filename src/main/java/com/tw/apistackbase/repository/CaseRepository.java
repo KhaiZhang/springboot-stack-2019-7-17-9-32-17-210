@@ -18,6 +18,9 @@ public interface CaseRepository extends JpaRepository<Case,Long>{
         List<Case> findAllByOrderByTimeDesc();
         List<Case> findAllByName(@Param(value = "name") String name);
 
+
+
+
         @Modifying
         @Transactional
         @Query("update Case set crimeInformation = :newCrimeInformation where id = :id ")

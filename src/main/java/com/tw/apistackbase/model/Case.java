@@ -19,7 +19,7 @@ public class Case {
     private String name;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "crimeInformationId" , referencedColumnName = "id")
     private CrimeInformation crimeInformation;
 
     public Case(){
